@@ -1,0 +1,44 @@
+# if score >= 70:
+#     print(score)
+#     MySurf = pygame.display.set_mode((500, 400))
+#     pygame.display.set_caption("Results")
+#     MySurf.fill((0, 255, 0))
+#     print("You Passed!")
+# else:
+#     print(score)
+#     MySurf = pygame.display.set_mode((500, 400))
+#     pygame.display.set_caption("Results")
+#     MySurf.fill((255, 0, 0))
+#     print("You failed l bozo")
+
+MySurf = pygame.display.set_mode((500, 400))
+pygame.display.set_caption("Results")
+font = pygame.font.Font('freesansbold.ttf', 32)
+white = (255, 255, 255)
+scoreStr = (str(score))
+scoreText = ('Your score was: ' + scoreStr + '/100')
+
+if score >= 70:
+    background = (0, 255, 75)
+    text = font.render(
+        'Congratulations, you passed!', True, white, background)
+else:
+    background = (255, 0, 0)
+    text = font.render('Sorry, try again...', True, white, background)
+
+textRect = text.get_rect()
+textRect.center = (500 // 2, 400 // 3)
+
+scoreDisp = font.render(scoreText, True, white, background)
+scoreDispRect = scoreDisp.get_rect()
+scoreDispRect.center = (500 // 2, 400 // 2)
+
+while True:
+    MySurf.fill(background)
+    MySurf.blit(text, textRect)
+    MySurf.blit(scoreDisp, scoreDispRect)
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+    pygame.display.update()
